@@ -82,7 +82,7 @@ export default function Hero() {
               fontFamily: 'var(--font-playfair)',
               fontStyle: 'italic',
               fontSize: 'clamp(3.5rem, 9vw, 8.75rem)',
-              color: '#111111',
+               color: '#111111',
               letterSpacing: '-0.03em',
               lineHeight: 0.88,
               marginTop: '4px',

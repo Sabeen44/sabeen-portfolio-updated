@@ -4,7 +4,7 @@ const navLinks = ["Projects", "Skills", "About", "Resume"];
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-fluid py-7 border-b border-ivory-faint relative z-10">
+    <nav className="flex items-center justify-between px-15 py-6 border-b border-ivory-faint relative z-10 bg-stone-50">
       <span className="font-sans font-medium tracking-widest text-ink text-fluid-label uppercase">
         Portfolio.
       </span>
@@ -14,7 +14,15 @@ export default function Navbar() {
           <li key={link}>
             <Link
               href={`#${link.toLowerCase()}`}
-              className="text-fluid-nav font-sans tracking-[0.14em] uppercase text-ink-muted hover:text-ink transition-colors duration-200"
+              className="
+  relative
+  text-fluid-nav font-sans tracking-[0.14em] uppercase text-gray-700
+  transition-all duration-200 hover:text-red-500
+  after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0
+  after:bg-red after:transition-all after:duration-300
+  hover:after:w-full
+"
+
             >
               {link}
             </Link>
