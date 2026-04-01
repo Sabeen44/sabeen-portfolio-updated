@@ -191,7 +191,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Info chips */}
-        <motion.div
+        {/* <motion.div
           custom={5} variants={fadeUp} initial="hidden" animate="show"
           className="flex gap-2 flex-wrap"
         >
@@ -221,7 +221,7 @@ export default function Hero() {
               </span>
             </div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
       </div>
 
@@ -329,7 +329,7 @@ export default function Hero() {
             left: 'clamp(-20px, -1vw, -12px)',
             width: 'clamp(26px, 2.5vw, 60px)',
             height: 'clamp(26px, 2.5vw, 60px)',
-            borderTop: '5px solid #E84545',
+            borderTop: '5px solid c',
             borderLeft: '5px solid #E84545',
             borderRadius: '2px',
             zIndex: 4,
@@ -392,7 +392,45 @@ export default function Hero() {
         >
           Folio — 01
         </div>
-
+{/* Info chips — bottom right of photo panel */}
+<motion.div
+  custom={5} variants={fadeUp} initial="hidden" animate="show"
+  className="absolute flex gap-2 flex-wrap justify-end"
+  style={{
+    bottom: 'clamp(20px, 2.5vw, 36px)',
+    right: 'clamp(24px, 4vw, 60px)',
+    zIndex: 5,
+  }}
+>
+  {chips.map((chip) => (
+    <div
+      key={chip.label}
+      style={{
+        background: 'rgba(7, 7, 7, 0.87)',
+        backdropFilter: 'blur(8px)',
+        padding: 'clamp(8px, 0.8vw, 11px) clamp(14px, 1.6vw, 22px)',
+        borderRadius: '4px',
+        minWidth: 'clamp(100px, 9vw, 140px)',
+        display: 'inline-flex',
+        flexDirection: 'column',
+        border: '1px solid rgba(255,255,255,0.08)',
+      }}
+    >
+      <span
+        className="uppercase tracking-widest"
+        style={{ fontSize: '9px', color: '#dfdfd4', fontFamily: 'var(--font-dm-sans)', marginBottom: '2px' }}
+      >
+        {chip.label}
+      </span>
+      <span
+        className="font-medium"
+        style={{ fontSize: 'clamp(12px, 1.1vw, 15px)', color: '#F8F6F0', fontFamily: 'var(--font-dm-sans)' }}
+      >
+        {chip.value}
+      </span>
+    </div>
+  ))}
+</motion.div>
         
 
       </motion.div>
