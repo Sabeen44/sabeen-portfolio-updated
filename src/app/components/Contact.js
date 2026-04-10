@@ -4,9 +4,9 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const links = [
-  { label: 'Email', value: 'sh.sabeen@gmail.com', href: 'mailto:sh.sabeen@gmail.com' },
-  { label: 'GitHub', value: 'Sabeen44', href: 'https://github.com/Sabeen44' },
-  { label: 'LinkedIn', value: 'Sabeen', href: '#' },
+  { label: 'Email', value: 'craftedstack@gmail.com', href: 'mailto:craftedstack@gmail.com' },
+  { label: 'GitHub', value: '@Sabeen44', href: 'https://github.com/Sabeen44' },
+  { label: 'LinkedIn', value: '@Sabeen', href: 'https://www.linkedin.com/in/sabeen-chaudhry/' },
 ];
 
 function CrossMark({ style }) {
@@ -138,6 +138,8 @@ export default function Contact() {
               <motion.a
                 key={link.label}
                 href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, x: 24 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.2 + i * 0.12, duration: 0.6 }}
@@ -198,13 +200,13 @@ export default function Contact() {
         >
           <span
             className="uppercase tracking-widest"
-            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '9px', color: '#444444' }}
+            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '10px', color: '#5c5b5b' }}
           >
-            © 2024 Sabeen. All rights reserved.
+            © 2026 Sabeen. All rights reserved.
           </span>
           <span
             className="uppercase tracking-widest hidden md:block"
-            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '9px', color: '#444444' }}
+            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '10px', color: '#5d5c5c' }}
           >
             Folio — 05
           </span>

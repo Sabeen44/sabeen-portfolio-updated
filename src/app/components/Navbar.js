@@ -4,7 +4,7 @@ const navLinks = ["Projects", "Skills", "About", "Resume"];
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-15 py-6 border-b border-ivory-faint relative z-10 bg-stone-50">
+    <nav className="flex items-center justify-between !px-16 !py-5 relative z-10 bg-stone-50">
       <span className="font-sans font-medium tracking-widest text-ink text-fluid-label uppercase">
         Portfolio.
       </span>

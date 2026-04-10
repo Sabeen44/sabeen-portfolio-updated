@@ -23,8 +23,8 @@ const chips = [
 function CrossMark({ style }) {
   return (
     <div className="absolute" style={{ opacity: 0.15, ...style }}>
-      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#111111', top: 0, left: '-7px' }} />
-      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#111111', top: '-7px', left: 0 }} />
+      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#bd0f0f', top: 0, left: '-7px' }} />
+      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#792020', top: '-7px', left: 0 }} />
     </div>
   );
 }
@@ -136,7 +136,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="#"
+            href="/resume.html"
             className="text-xs tracking-widest uppercase font-medium transition-colors"
             style={{
               color: '#111111',
@@ -190,39 +190,7 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* Info chips */}
-        {/* <motion.div
-          custom={5} variants={fadeUp} initial="hidden" animate="show"
-          className="flex gap-2 flex-wrap"
-        >
-          {chips.map((chip) => (
-            <div
-              key={chip.label}
-              style={{
-                background: '#111111',
-                padding: 'clamp(8px, 0.8vw, 11px) clamp(14px, 1.6vw, 22px)',
-                borderRadius: '4px',
-                minWidth: 'clamp(110px, 10vw, 150px)',
-                display: 'inline-flex',
-                flexDirection: 'column',
-              }}
-            >
-              <span
-                className="uppercase tracking-widest"
-                style={{ fontSize: '9px', color: '#666660', fontFamily: 'var(--font-dm-sans)', marginBottom: '2px' }}
-              >
-                {chip.label}
-              </span>
-              <span
-                className="font-medium"
-                style={{ fontSize: 'clamp(12px, 1.1vw, 16px)', color: '#F8F6F0', fontFamily: 'var(--font-dm-sans)' }}
-              >
-                {chip.value}
-              </span>
-            </div>
-          ))}
-        </motion.div> */}
-
+        
       </div>
 
       {/* ── RIGHT — Photo panel ── */}
@@ -329,7 +297,7 @@ export default function Hero() {
             left: 'clamp(-20px, -1vw, -12px)',
             width: 'clamp(26px, 2.5vw, 60px)',
             height: 'clamp(26px, 2.5vw, 60px)',
-            borderTop: '5px solid c',
+            borderTop: '5px solid #E84545',
             borderLeft: '5px solid #E84545',
             borderRadius: '2px',
             zIndex: 4,
@@ -384,7 +352,7 @@ export default function Hero() {
           style={{
             bottom: 'clamp(20px, 2.5vw, 36px)',
             left: 'clamp(24px, 5vw, 80px)',
-            fontSize: 'clamp(8px, 0.6vw, 10px)',
+            fontSize: 'clamp(10px, 0.6vw, 10px)',
             color: '#BBBBB0',
             fontFamily: 'var(--font-dm-sans)',
             zIndex: 5,
@@ -418,7 +386,7 @@ export default function Hero() {
     >
       <span
         className="uppercase tracking-widest"
-        style={{ fontSize: '9px', color: '#dfdfd4', fontFamily: 'var(--font-dm-sans)', marginBottom: '2px' }}
+        style={{ fontSize: '10px', color: '#dfdfd4', fontFamily: 'var(--font-dm-sans)', marginBottom: '2px' }}
       >
         {chip.label}
       </span>

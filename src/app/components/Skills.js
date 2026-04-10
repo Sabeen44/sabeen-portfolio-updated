@@ -7,28 +7,35 @@ const skills = [
   {
     number: '01',
     category: 'Front-End',
-    items: ['HTML', 'CSS', 'JavaScript', 'React', 'Angular', 'Tailwind CSS'],
+    items: ['Next.js', 'React', 'Vite', 'Tailwind', 'Framer Motion', 'Zustand'],
   },
   {
     number: '02',
     category: 'Back-End',
-    items: ['Node.js', 'Express', 'REST APIs', 'MongoDB', 'MySQL'],
+    items: ['Node.js', 'Express.js', 'RESTful API', 'Supabase', 'Webhooks'],
   },
   {
     number: '03',
     category: 'Tools',
-    items: ['Git', 'GitHub', 'VS Code', 'Postman', 'Figma'],
+    items: ['Git', 'GitHub', 'Vercel', 'Stripe Dashboard', 'Figma', 'Postman'],
   },
 ];
 
 function CrossMark({ style }) {
   return (
     <div className="absolute pointer-events-none" style={{ opacity: 0.15, ...style }}>
-      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#111111', top: 0, left: '-7px' }} />
-      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#111111', top: '-7px', left: 0 }} />
+      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#1111', top: 0, left: '-7px' }} />
+      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#1111', top: '-7px', left: 0 }} />
     </div>
   );
 }
+// function CrossMark({ className }) {
+//   return (
+//     <div className={`absolute w-5 h-5 opacity-15 pointer-events-none ${className}`}>
+//       <span className="absolute w-3.5 h-px bg-black top-0 -left-[7px]" />
+//       <span className="absolute w-px h-3.5 bg-ink -top-[7px] left-0" />
+//     </div>
+//   )}
 
 function SkillCard({ skill, index }) {
   const ref = useRef(null);
@@ -222,8 +229,9 @@ export default function Skills() {
           className="uppercase tracking-widest mt-16 hidden md:block"
           style={{
             fontFamily: 'var(--font-dm-sans)',
-            fontSize: '9px',
+            fontSize: '10px',
             color: '#BBBBB0',
+            marginTop:"12px"
           }}
         >
           Folio — 02

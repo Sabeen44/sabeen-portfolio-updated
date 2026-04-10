@@ -7,37 +7,41 @@ const projects = [
   {
     number: '01',
     title: 'Project One',
-    description: 'A brief description of what this project does, the problem it solves, and who it is for.',
-    tags: ['React', 'Node.js', 'MongoDB'],
+    description: 'modern SaaS-style platform that provides subscription-based access to core features, built with a scalable architecture and a polished, user‑first interface.',
+    tags: ['React/Vite', 'Node.js', 'Supabase'],
     liveUrl: '#',
     githubUrl: '#',
   },
   {
     number: '02',
     title: 'Project Two',
-    description: 'A brief description of what this project does, the problem it solves, and who it is for.',
-    tags: ['Next.js', 'Tailwind CSS', 'MySQL'],
+    description: 'fun, interactive web app that recommends movies based on the user’s mood—expressed through emojis. integrates the Streaming Availability API to surface real‑time movie info and where to watch them.', 
+    tags: ['React', 'Tailwind', 'RESTapi'],
     liveUrl: '#',
     githubUrl: '#',
   },
   {
     number: '03',
     title: 'Project Three',
-    description: 'A brief description of what this project does, the problem it solves, and who it is for.',
-    tags: ['JavaScript', 'Express', 'REST API'],
+    description: ' think Google Docs lite — users can create notebooks, write notes, and can share/collaborate with others in real time.Features include: online presence indicators, rich text editor, AI writing assistant.',
+    tags: ['Next.js', 'Supabase', 'Claude API', 'TipTap'],
     liveUrl: '#',
     githubUrl: '#',
   },
 ];
-
 function CrossMark({ style }) {
   return (
     <div className="absolute pointer-events-none" style={{ opacity: 0.15, ...style }}>
-      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#111111', top: 0, left: '-7px' }} />
-      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#111111', top: '-7px', left: 0 }} />
+      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#1111', top: 0, left: '-7px' }} />
+      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#1111', top: '-7px', left: 0 }} />
     </div>
   );
 }
+
+
+
+
+
 
 function ProjectCard({ project, index }) {
   const ref = useRef(null);
@@ -92,7 +96,7 @@ function ProjectCard({ project, index }) {
           <a
             href={project.githubUrl}
             className="uppercase tracking-widest transition-colors"
-            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '9px', color: '#888880' }}
+            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '15px', color: '#888880' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = '#E84545')}
             onMouseLeave={(e) => (e.currentTarget.style.color = '#888880')}
           >
@@ -101,7 +105,7 @@ function ProjectCard({ project, index }) {
           <a
             href={project.liveUrl}
             className="uppercase tracking-widest transition-colors"
-            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '9px', color: '#888880' }}
+            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '15px', color: '#888880' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = '#E84545')}
             onMouseLeave={(e) => (e.currentTarget.style.color = '#888880')}
           >
@@ -260,7 +264,7 @@ export default function Projects() {
         {/* Editorial folio */}
         <div
           className="uppercase tracking-widest mt-16 hidden md:block"
-          style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '9px', color: '#BBBBB0', marginTop:'20px' }}
+          style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '10px', color: '#BBBBB0', marginTop:'20px' }}
         >
           Folio — 03
         </div>
@@ -269,3 +273,4 @@ export default function Projects() {
     </section>
   );
 }
+
