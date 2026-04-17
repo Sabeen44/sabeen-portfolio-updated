@@ -373,27 +373,40 @@
   }
 
   @media (max-width: 640px) {
-    .header { padding: 2.5rem 1.5rem 2rem; }
+    body { padding: 1.25rem 0.75rem; }
+
+    .header { padding: 2rem 1.25rem 1.75rem; }
     .header-grid { grid-template-columns: 1fr; }
-    .contact-stack { align-items: flex-start; }
-    .name { font-size: 2.6rem; }
+    .contact-stack { align-items: flex-start; margin-top: 1rem; }
+    .name { font-size: 2.2rem; }
+    .tagline { font-size: 0.78rem; }
+
     .body-grid { grid-template-columns: 1fr; }
-    .sidebar { border-right: none; border-bottom: 1px solid var(--rule); padding: 2rem 1.5rem; }
-    .main { padding: 2rem 1.5rem; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--rule); padding: 1.75rem 1.25rem; }
+    .main { padding: 1.75rem 1.25rem; }
+
+    /* Stack project name + link vertically so long URLs don't overflow */
+    .project-header { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+    .project-link { word-break: break-all; font-size: 0.7rem; }
+
+    /* Stack experience title + date vertically */
+    .exp-header { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+    .exp-date { font-size: 0.7rem; }
+
+    .section-heading { font-size: 1.1rem; }
   }
 </style>
 </head>
 <body>
  <a href="/" style="
-  font-family: var(--font-dm-sans, sans-serif);
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: #E84545;
   text-decoration: none;
-  margin-right: 5rem;
   display: inline-block;
-  
+  margin-bottom: 1.25rem;
 ">
   ← Back to Portfolio
 </a>
@@ -510,7 +523,7 @@
         <div class="project-item">
           <div class="project-header">
             <span class="project-name">PickFlick</span>
-            <a href="https://github.com/Sabeen44/emojify" class="project-link" target="_blank">github.com/Sabeen44/PickFlick</a>
+            <a href="https://pick-flick-three.vercel.app/" class="project-link" target="_blank">github.com/Sabeen44/PickFlick</a>
           </div>
           <p class="project-desc">
             Fun,interactive website to choose a movie based on users mood expressed through Emojis. Integrates the Streaming Availability API to surface real-time movie info.

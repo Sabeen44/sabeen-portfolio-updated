@@ -7,35 +7,29 @@ const skills = [
   {
     number: '01',
     category: 'Front-End',
-    items: ['Next.js', 'React', 'Vite', 'Tailwind', 'Framer Motion', 'Zustand'],
+    items: ['Next.js', 'React', 'Vite', 'Tailwind', 'Framer Motion', 'TipTap'],
   },
   {
     number: '02',
     category: 'Back-End',
-    items: ['Node.js', 'Express.js', 'RESTful API', 'Supabase', 'Webhooks'],
+    items: ['Node.js', 'Express.js', 'RESTful API', 'Supabase', 'Claude API', 'Stripe'],
   },
   {
     number: '03',
     category: 'Tools',
-    items: ['Git', 'GitHub', 'Vercel', 'Stripe Dashboard', 'Figma', 'Postman'],
+    items: ['Git', 'GitHub', 'Vercel', 'Figma', 'Postman', 'Zustand'],
   },
 ];
 
+// Decorative cross — geometric, keep inline styles
 function CrossMark({ style }) {
   return (
-    <div className="absolute pointer-events-none" style={{ opacity: 0.15, ...style }}>
-      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#1111', top: 0, left: '-7px' }} />
-      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#1111', top: '-7px', left: 0 }} />
+    <div className="absolute pointer-events-none opacity-15" style={style}>
+      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#111111', top: 0, left: '-7px' }} />
+      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#111111', top: '-7px', left: 0 }} />
     </div>
   );
 }
-// function CrossMark({ className }) {
-//   return (
-//     <div className={`absolute w-5 h-5 opacity-15 pointer-events-none ${className}`}>
-//       <span className="absolute w-3.5 h-px bg-black top-0 -left-[7px]" />
-//       <span className="absolute w-px h-3.5 bg-ink -top-[7px] left-0" />
-//     </div>
-//   )}
 
 function SkillCard({ skill, index }) {
   const ref = useRef(null);
@@ -47,87 +41,40 @@ function SkillCard({ skill, index }) {
       initial={{ opacity: 0, y: 32 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.15, duration: 0.6, ease: 'easeOut' }}
-      className="relative flex flex-col gap-6"
-      style={{
-        background: '#FFFFFF',
-        border: '1px solid #DEDAD2',
-        borderRadius: '2px',
-        padding: 'clamp(1.5rem, 2.5vw, 2.25rem)',
-        boxShadow: '6px 6px 0px #111111',
-        transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = '6px 6px 0px #E84545';
-        e.currentTarget.style.borderColor = '#E84545';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = '6px 6px 0px #111111';
-        e.currentTarget.style.borderColor = '#DEDAD2';
-      }}
+      className="relative flex flex-col gap-6 bg-white border border-[#DEDAD2] rounded-sm
+        p-6 lg:p-9 shadow-[6px_6px_0px_#111111]
+        hover:shadow-[6px_6px_0px_#E84545] hover:border-[#E84545] transition-all duration-200"
     >
       {/* Corner bracket */}
-      <div style={{
-        position: 'absolute',
-        top: '-8px',
-        left: '-8px',
-        width: '24px',
-        height: '24px',
-        borderTop: '2px solid #E84545',
-        borderLeft: '2px solid #E84545',
-        borderRadius: '1px',
-      }} />
+      <div
+        className="absolute -top-2 -left-2 w-6 h-6 rounded-[1px]"
+        style={{ borderTop: '2px solid #E84545', borderLeft: '2px solid #E84545' }}
+      />
 
       {/* Card header */}
       <div className="flex items-center justify-between">
         <span
-          style={{
-            fontFamily: 'var(--font-playfair)',
-            fontStyle: 'italic',
-            fontSize: 'clamp(1.1rem, 1.5vw, 1.35rem)',
-            color: '#111111',
-            letterSpacing: '-0.01em',
-          }}
+          className="font-display italic text-[#111111] tracking-[-0.01em]"
+          style={{ fontSize: 'clamp(1.1rem,1.5vw,1.35rem)' }}
         >
           {skill.category}
         </span>
-        <span
-          className="uppercase tracking-widest"
-          style={{
-            fontFamily: 'var(--font-dm-sans)',
-            fontSize: '9px',
-            color: '#BBBBB0',
-          }}
-        >
+        <span className="uppercase tracking-widest font-dm text-[#BBBBB0]" style={{ fontSize: '9px' }}>
           {skill.number}
         </span>
       </div>
 
       {/* Red underline accent */}
-      <div style={{ width: '32px', height: '2px', background: '#E84545', borderRadius: '2px', marginTop: '-16px' }} />
+      <div className="w-8 h-0.5 bg-[#E84545] rounded-sm -mt-4" />
 
       {/* Skill tags */}
       <div className="flex flex-wrap gap-2">
         {skill.items.map((item) => (
           <span
             key={item}
-            className="text-xs uppercase tracking-widest font-medium cursor-default transition-all"
-            style={{
-              fontFamily: 'var(--font-dm-sans)',
-              border: '1px solid #DEDAD2',
-              color: '#444444',
-              padding: '5px 12px',
-              borderRadius: '100px',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#111111';
-              e.currentTarget.style.borderColor = '#111111';
-              e.currentTarget.style.color = '#F8F6F0';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = '#DEDAD2';
-              e.currentTarget.style.color = '#444444';
-            }}
+            className="text-xs uppercase tracking-widest font-medium font-dm cursor-default
+              border border-[#DEDAD2] text-[#444444] rounded-full px-3 py-1
+              hover:bg-[#111111] hover:border-[#111111] hover:text-[#F8F6F0] transition-all"
           >
             {item}
           </span>
@@ -135,20 +82,13 @@ function SkillCard({ skill, index }) {
       </div>
 
       {/* Footer */}
-      <div
-        className="flex items-center gap-2 mt-auto pt-4"
-        style={{ borderTop: '1px solid #EDEAE2' }}
-      >
-        {/* Pulsing dot */}
+      <div className="flex items-center gap-2 mt-auto pt-4 border-t border-[#EDEAE2]">
         <motion.div
           animate={{ scale: [1, 0.8, 1], opacity: [1, 0.5, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 }}
-          style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#E84545', flexShrink: 0 }}
+          className="w-1.5 h-1.5 rounded-full bg-[#E84545] shrink-0"
         />
-        <span
-          className="uppercase tracking-widest"
-          style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '9px', color: '#BBBBB0' }}
-        >
+        <span className="uppercase tracking-widest font-dm text-[#BBBBB0]" style={{ fontSize: '9px' }}>
           {skill.items.length} technologies
         </span>
       </div>
@@ -163,22 +103,17 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative overflow-hidden"
-      style={{
-        background: '#F8F6F0',
-        padding: 'clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem)',
-      }}
+      className="relative overflow-hidden bg-[#F8F6F0] px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-28"
     >
-      {/* Horizontal editorial rule lines (echoes Hero right panel) */}
+      {/* Horizontal editorial rule lines */}
       {[20, 50, 80].map((pct) => (
         <div
           key={pct}
-          className="absolute pointer-events-none"
-          style={{ left: 0, right: 0, top: `${pct}%`, height: '0.5px', background: 'rgba(17,17,17,0.06)' }}
+          className="absolute left-0 right-0 pointer-events-none"
+          style={{ top: `${pct}%`, height: '0.5px', background: 'rgba(17,17,17,0.06)' }}
         />
       ))}
 
-      {/* Cross marks scattered */}
       <CrossMark style={{ top: '12%', right: '8%' }} />
       <CrossMark style={{ bottom: '18%', left: '4%' }} />
       <CrossMark style={{ top: '55%', right: '22%' }} />
@@ -193,47 +128,27 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-16"
         >
-          <span
-            className="uppercase tracking-widest font-medium"
-            style={{
-              fontFamily: 'var(--font-dm-sans)',
-              fontSize: '11px',
-              color: '#E84545',
-            }}
-          >
+          <span className="uppercase tracking-widest font-medium font-dm text-[#E84545]" style={{ fontSize: '11px' }}>
             02 — Skills
           </span>
-          <div style={{ flex: 1, height: '0.5px', background: '#DEDAD2' }} />
+          <div className="flex-1 bg-[#DEDAD2]" style={{ height: '0.5px' }} />
           <h2
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-              color: '#111111',
-              letterSpacing: '-0.02em',
-            }}
+            className="font-display italic text-[#111111] tracking-[-0.02em]"
+            style={{ fontSize: 'clamp(1.75rem,3vw,2.5rem)' }}
           >
             My Skills
           </h2>
         </motion.div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {skills.map((skill, i) => (
             <SkillCard key={skill.category} skill={skill} index={i} />
           ))}
         </div>
 
         {/* Editorial folio number */}
-        <div
-          className="uppercase tracking-widest mt-16 hidden md:block"
-          style={{
-            fontFamily: 'var(--font-dm-sans)',
-            fontSize: '10px',
-            color: '#BBBBB0',
-            marginTop:"12px"
-          }}
-        >
+        <div className="uppercase tracking-widest mt-3 hidden md:block font-dm text-[#BBBBB0]" style={{ fontSize: '10px' }}>
           Folio — 02
         </div>
 

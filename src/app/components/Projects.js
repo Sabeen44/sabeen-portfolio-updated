@@ -2,46 +2,45 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Link from 'next/link';
 
 const projects = [
   {
     number: '01',
-    title: 'Project One',
-    description: 'modern SaaS-style platform that provides subscription-based access to core features, built with a scalable architecture and a polished, user‑first interface.',
+    title: 'DigiReach',
+    description: 'Redesigned and rebuilt a client\'s site into a modern SaaS-style platform with subscription-based access, scalable architecture, and a polished user‑first interface.',
     tags: ['React/Vite', 'Node.js', 'Supabase'],
-    liveUrl: '#',
-    githubUrl: '#',
+    liveUrl: 'https://github.com/Sabeen44/digiReach',
+    githubUrl: 'https://github.com/Sabeen44/digiReach',
+    caseStudyUrl: '/case-study/digireach',
   },
   {
     number: '02',
-    title: 'Project Two',
-    description: 'fun, interactive web app that recommends movies based on the user’s mood—expressed through emojis. integrates the Streaming Availability API to surface real‑time movie info and where to watch them.', 
-    tags: ['React', 'Tailwind', 'RESTapi'],
-    liveUrl: '#',
-    githubUrl: '#',
+    title: 'PickFlick',
+    description: 'Fun, interactive app that recommends movies based on the user\'s mood — expressed through emojis. Integrates the Streaming Availability API to surface real‑time movie info and where to watch.',
+    tags: ['React', 'Tailwind', 'REST API'],
+    liveUrl: 'https://pick-flick-three.vercel.app/',
+    githubUrl: 'https://github.com/Sabeen44/PickFlick-updated',
   },
   {
     number: '03',
-    title: 'Project Three',
-    description: ' think Google Docs lite — users can create notebooks, write notes, and can share/collaborate with others in real time.Features include: online presence indicators, rich text editor, AI writing assistant.',
+    title: 'Noted',
+    description: 'Google Docs lite — users create notebooks, write notes, and collaborate in real time. Features online presence indicators, a rich text editor, and an AI writing assistant.',
     tags: ['Next.js', 'Supabase', 'Claude API', 'TipTap'],
-    liveUrl: '#',
-    githubUrl: '#',
+    liveUrl: 'https://github.com/Sabeen44/Noted',
+    githubUrl: 'https://github.com/Sabeen44/Noted',
   },
 ];
+
+// Decorative cross — geometric, keep inline styles
 function CrossMark({ style }) {
   return (
-    <div className="absolute pointer-events-none" style={{ opacity: 0.15, ...style }}>
-      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#1111', top: 0, left: '-7px' }} />
-      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#1111', top: '-7px', left: 0 }} />
+    <div className="absolute pointer-events-none opacity-15" style={style}>
+      <div style={{ position: 'absolute', width: '14px', height: '1px', background: '#111111', top: 0, left: '-7px' }} />
+      <div style={{ position: 'absolute', width: '1px', height: '14px', background: '#111111', top: '-7px', left: 0 }} />
     </div>
   );
 }
-
-
-
-
-
 
 function ProjectCard({ project, index }) {
   const ref = useRef(null);
@@ -53,145 +52,101 @@ function ProjectCard({ project, index }) {
       initial={{ opacity: 0, y: 32 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.15, duration: 0.6, ease: 'easeOut' }}
-      className="relative flex flex-col gap-5"
-      style={{
-        background: '#FFFFFF',
-        border: '1px solid #DEDAD2',
-        borderRadius: '2px',
-        padding: 'clamp(1.5rem, 2.5vw, 2.25rem)',
-        boxShadow: '6px 6px 0px #111111',
-        transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = '6px 6px 0px #E84545';
-        e.currentTarget.style.borderColor = '#E84545';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = '6px 6px 0px #111111';
-        e.currentTarget.style.borderColor = '#DEDAD2';
-      }}
+      className="relative flex flex-col gap-5 bg-white border border-[#DEDAD2] rounded-sm
+        p-6 lg:p-9 shadow-[6px_6px_0px_#111111]
+        hover:shadow-[6px_6px_0px_#E84545] hover:border-[#E84545] transition-all duration-200"
     >
       {/* Red corner bracket */}
-      <div style={{
-        position: 'absolute',
-        top: '-8px',
-        left: '-8px',
-        width: '24px',
-        height: '24px',
-        borderTop: '2px solid #E84545',
-        borderLeft: '2px solid #E84545',
-        borderRadius: '1px',
-      }} />
+      <div
+        className="absolute -top-2 -left-2 w-6 h-6 rounded-[1px]"
+        style={{ borderTop: '2px solid #E84545', borderLeft: '2px solid #E84545' }}
+      />
 
       {/* Top row — number + links */}
       <div className="flex items-center justify-between">
-        <span
-          className="uppercase tracking-widest"
-          style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '9px', color: '#BBBBB0' }}
-        >
+        <span className="uppercase tracking-widest font-dm text-[#BBBBB0]" style={{ fontSize: '9px' }}>
           {project.number}
         </span>
-
         <div className="flex gap-4">
           <a
             href={project.githubUrl}
-            className="uppercase tracking-widest transition-colors"
-            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '15px', color: '#888880' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#E84545')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#888880')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="uppercase tracking-widest font-dm text-[#888880] text-[15px] hover:text-[#E84545] transition-colors"
           >
             GitHub
           </a>
-          <a
-            href={project.liveUrl}
-            className="uppercase tracking-widest transition-colors"
-            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '15px', color: '#888880' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#E84545')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#888880')}
-          >
-            Live ↗
-          </a>
+          {project.liveUrl && project.liveUrl !== project.githubUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="uppercase tracking-widest font-dm text-[#888880] text-[15px] hover:text-[#E84545] transition-colors"
+            >
+              Live ↗
+            </a>
+          )}
         </div>
       </div>
 
       {/* Divider */}
-      <div style={{ height: '0.5px', background: '#EDEAE2' }} />
+      <div className="bg-[#EDEAE2]" style={{ height: '0.5px' }} />
 
       {/* Title */}
       <h3
-        className="transition-colors"
-        style={{
-          fontFamily: 'var(--font-playfair)',
-          fontStyle: 'italic',
-          fontSize: 'clamp(1.1rem, 1.5vw, 1.35rem)',
-          color: '#111111',
-          letterSpacing: '-0.01em',
-        }}
+        className="font-display italic text-[#111111] tracking-[-0.01em] transition-colors"
+        style={{ fontSize: 'clamp(1.1rem,1.5vw,1.35rem)' }}
       >
         {project.title}
       </h3>
 
       {/* Red underline accent */}
-      <div style={{ width: '32px', height: '2px', background: '#E84545', borderRadius: '2px', marginTop: '-12px' }} />
+      <div className="w-8 h-0.5 bg-[#E84545] rounded-sm -mt-3" />
 
       {/* Description */}
       <p
-        className="leading-relaxed"
-        style={{
-          fontFamily: 'var(--font-dm-sans)',
-          fontSize: 'clamp(0.75rem, 0.9vw, 0.875rem)',
-          color: '#888880',
-        }}
+        className="leading-relaxed text-[#888880] font-dm"
+        style={{ fontSize: 'clamp(0.75rem,0.9vw,0.875rem)' }}
       >
         {project.description}
       </p>
 
-      {/* Tags — pill style matching Skills */}
+      {/* Tags */}
       <div className="flex flex-wrap gap-2 mt-auto pt-2">
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="uppercase tracking-widest font-medium cursor-default transition-all"
-            style={{
-              fontFamily: 'var(--font-dm-sans)',
-              fontSize: '9px',
-              border: '1px solid #DEDAD2',
-              color: '#444444',
-              padding: '5px 12px',
-              borderRadius: '100px',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#111111';
-              e.currentTarget.style.borderColor = '#111111';
-              e.currentTarget.style.color = '#F8F6F0';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = '#DEDAD2';
-              e.currentTarget.style.color = '#444444';
-            }}
+            className="uppercase tracking-widest font-medium font-dm cursor-default
+              border border-[#DEDAD2] text-[#444444] rounded-full px-3 py-1
+              hover:bg-[#111111] hover:border-[#111111] hover:text-[#F8F6F0] transition-all"
+            style={{ fontSize: '9px' }}
           >
             {tag}
           </span>
         ))}
       </div>
 
-      {/* Footer — tech count like Skills */}
-      <div
-        className="flex items-center gap-2 pt-4"
-        style={{ borderTop: '1px solid #EDEAE2' }}
-      >
-        <motion.div
-          animate={{ scale: [1, 0.8, 1], opacity: [1, 0.5, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 }}
-          style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#E84545', flexShrink: 0 }}
-        />
-        <span
-          className="uppercase tracking-widest"
-          style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '9px', color: '#BBBBB0' }}
-        >
-          {project.tags.length} technologies
-        </span>
+      {/* Footer */}
+      <div className="flex items-center justify-between pt-4 border-t border-[#EDEAE2]">
+        <div className="flex items-center gap-2">
+          <motion.div
+            animate={{ scale: [1, 0.8, 1], opacity: [1, 0.5, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 }}
+            className="w-1.5 h-1.5 rounded-full bg-[#E84545] shrink-0"
+          />
+          <span className="uppercase tracking-widest font-dm text-[#BBBBB0]" style={{ fontSize: '9px' }}>
+            {project.tags.length} technologies
+          </span>
+        </div>
+        {project.caseStudyUrl && (
+          <Link
+            href={project.caseStudyUrl}
+            className="inline-flex items-center gap-1.5 uppercase tracking-widest font-dm font-medium text-[#E84545] hover:text-[#111111] transition-colors"
+            style={{ fontSize: '9px' }}
+          >
+            Case Study <span className="text-[11px]">→</span>
+          </Link>
+        )}
       </div>
     </motion.div>
   );
@@ -202,24 +157,19 @@ export default function Projects() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section 
+    <section
       id="projects"
-      className="justify-items-center"
-      style={{
-        background: '#EDEAE2',
-        padding: 'clamp(4rem, 8vw, 12rem) clamp(1.5rem, 5vw, 5rem)',
-      }}
+      className="relative bg-[#EDEAE2] px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-28"
     >
       {/* Horizontal editorial rule lines */}
       {[20, 50, 80].map((pct) => (
         <div
           key={pct}
-          className="absolute pointer-events-none"
-          style={{ left: 0, right: 0, top: `${pct}%`, height: '0.5px', background: 'rgba(17,17,17,0.06)' }}
+          className="absolute left-0 right-0 pointer-events-none"
+          style={{ top: `${pct}%`, height: '0.5px', background: 'rgba(17,17,17,0.06)' }}
         />
       ))}
 
-      {/* Cross marks */}
       <CrossMark style={{ top: '10%', right: '6%' }} />
       <CrossMark style={{ bottom: '15%', left: '6%' }} />
       <CrossMark style={{ top: '58%', right: '20%' }} />
@@ -232,40 +182,29 @@ export default function Projects() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-4 mb-16"
+          className="flex items-center gap-4 mb-16 flex-wrap"
         >
-          <span
-            className="uppercase tracking-widest font-medium"
-            style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '11px', color: '#E84545' }}
-          >
+          <span className="uppercase tracking-widest font-medium font-dm text-[#E84545]" style={{ fontSize: '11px' }}>
             03 — Projects
           </span>
-          <div style={{ flex: 1, height: '0.5px', background: '#DEDAD2' }} />
+          <div className="flex-1 bg-[#DEDAD2]" style={{ height: '0.5px' }} />
           <h2
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-              color: '#111111',
-              letterSpacing: '-0.02em',
-            }}
+            className="font-display italic text-[#111111] tracking-[-0.02em]"
+            style={{ fontSize: 'clamp(1.75rem,3vw,2.5rem)' }}
           >
             My Work
           </h2>
         </motion.div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {projects.map((project, i) => (
             <ProjectCard key={project.number} project={project} index={i} />
           ))}
         </div>
 
         {/* Editorial folio */}
-        <div
-          className="uppercase tracking-widest mt-16 hidden md:block"
-          style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '10px', color: '#BBBBB0', marginTop:'20px' }}
-        >
+        <div className="uppercase tracking-widest mt-5 hidden md:block font-dm text-[#BBBBB0]" style={{ fontSize: '10px' }}>
           Folio — 03
         </div>
 
@@ -273,4 +212,3 @@ export default function Projects() {
     </section>
   );
 }
-

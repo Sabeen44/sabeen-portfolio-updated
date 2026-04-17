@@ -7,6 +7,7 @@ import Contact from './components/Contact';
 
 
 
+
 export default function Home() {
   return (
     <main>
@@ -14,9 +15,9 @@ export default function Home() {
       <Skills />
       <Projects />
        <About />
-       {/* <Footer/> */}
-      <Contact />  
-     
+      <Contact />
+      <Footer />
+
     </main>
   );
 }

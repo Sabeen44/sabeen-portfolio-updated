@@ -1,14 +1,22 @@
 @import "tailwindcss";
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@theme {
+  /* Brand colors */
+  --color-red: #E84545;
+  --color-ink: #111111;
+  --color-cream: #F8F6F0;
+  --color-muted: #888880;
+  --color-line: #DEDAD2;
+  --color-faint: #BBBBB0;
+  --color-warm: #444444;
+  --color-ivory: #EDEAE2;
+  --color-sand: #f5f4f2;
+
+  /* Custom fonts (Next.js injects the actual font-family string via CSS vars) */
+  --font-display: var(--font-playfair), serif;
+  --font-dm: var(--font-dm-sans), sans-serif;
 }
-
-
 
 html {
   scroll-behavior: smooth;
 }
-
