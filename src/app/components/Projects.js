@@ -10,7 +10,7 @@ const projects = [
     title: 'DigiReach',
     description: 'Redesigned and rebuilt a client\'s site into a modern SaaS-style platform with subscription-based access, scalable architecture, and a polished user‑first interface.',
     tags: ['React/Vite', 'Node.js', 'Supabase'],
-    liveUrl: 'https://github.com/Sabeen44/digiReach',
+    liveUrl: 'https://www.digireachnow.com/',
     githubUrl: 'https://github.com/Sabeen44/digiReach',
     caseStudyUrl: '/case-study/digireach',
   },
@@ -27,7 +27,7 @@ const projects = [
     title: 'Noted',
     description: 'Google Docs lite — users create notebooks, write notes, and collaborate in real time. Features online presence indicators, a rich text editor, and an AI writing assistant.',
     tags: ['Next.js', 'Supabase', 'Claude API', 'TipTap'],
-    liveUrl: 'https://github.com/Sabeen44/Noted',
+    liveUrl: 'https://noted-iota-three.vercel.app/',
     githubUrl: 'https://github.com/Sabeen44/Noted',
   },
 ];
