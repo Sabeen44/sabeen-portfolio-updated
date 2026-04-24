@@ -3,6 +3,9 @@
 A clean, editorial‑inspired portfolio built with **Next.js**, **React**, and **Tailwind CSS**.  
 Designed to showcase projects, skills, and experience through intentional typography, subtle motion, and a minimal visual system.
 
+## 🔗 Live Demo
+https://sabeen.dev
+
 ## ✦ Tech Stack
 - Next.js 
 - React
@@ -37,6 +40,7 @@ npm run dev
 
 ## ✦ Deployment
 Deployed on Vercel for production‑grade performance and global edge delivery.
+
 
 ## ✦ Notes
 This portfolio is an evolving space — new projects and refinements added periodcally.

@@ -276,7 +276,7 @@ export default function Hero() {
         <motion.div
           custom={5} variants={fadeUp} initial="hidden" animate="show"
           className="absolute flex gap-2 flex-wrap justify-end z-[5]"
-          style={{ bottom: 'clamp(20px,2.5vw,36px)', right: 'clamp(24px,4vw,60px)' }}
+          style={{ bottom: 'clamp(60px,7vw,100px)', right: 'clamp(24px,4vw,60px)' }}
         >
           {chips.map((chip) => (
             <div

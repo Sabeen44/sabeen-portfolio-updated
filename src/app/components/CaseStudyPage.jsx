@@ -101,12 +101,6 @@ function BeforeAfterSlider() {
     };
   }, []);
 
-  const panelBase = {
-    position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
-    display: "flex", flexDirection: "column", justifyContent: "center",
-    padding: "clamp(24px, 4vw, 48px)",
-  };
-
   return (
     <div
       ref={containerRef}
@@ -119,36 +113,18 @@ function BeforeAfterSlider() {
       }}
     >
       {/* AFTER (full background) */}
-      <div style={{ ...panelBase, background: T.bg, zIndex: 1 }}>
-        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: T.red, fontWeight: 500, marginBottom: "16px" }}>After</span>
-        <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(28px, 4vw, 44px)", fontStyle: "italic", color: T.dark, lineHeight: 1.1, marginBottom: "12px", letterSpacing: "-0.02em" }}>
-          Modern. Clear.<br />Conversion-ready.
-        </div>
-        <div style={{ width: "48px", height: "2.5px", background: T.red, borderRadius: "1px", marginBottom: "14px" }} />
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: 1.65, color: T.muted, maxWidth: "340px" }}>
-          Clean editorial layout with strong typography, clear CTAs, fast performance, and full mobile responsiveness.
-        </p>
-        <div style={{ display: "flex", gap: "8px", marginTop: "16px", flexWrap: "wrap" }}>
-          {["98 Performance", "Mobile-first", "2s Load Time"].map((t) => (
-            <span key={t} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 500, color: T.chip, border: `1px solid ${T.border}`, borderRadius: "100px", padding: "4px 10px" }}>{t}</span>
-          ))}
+      <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+        <img src="/after.png" alt="After redesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+        <div style={{ position: "absolute", bottom: "12px", right: "12px", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", borderRadius: "100px", padding: "4px 12px" }}>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", fontWeight: 500 }}>After</span>
         </div>
       </div>
 
       {/* BEFORE (clipped) */}
-      <div style={{ ...panelBase, background: "#2A2A28", zIndex: 2, clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", fontWeight: 500, marginBottom: "16px" }}>Before</span>
-        <div style={{ fontFamily: "Georgia, serif", fontSize: "clamp(24px, 3.5vw, 36px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.2, marginBottom: "12px" }}>
-          Outdated. Cluttered.<br />Hard to navigate.
-        </div>
-        <div style={{ width: "48px", height: "2px", background: "rgba(255,255,255,0.15)", borderRadius: "1px", marginBottom: "14px" }} />
-        <p style={{ fontFamily: "Georgia, serif", fontSize: "13px", lineHeight: 1.65, color: "rgba(255,255,255,0.3)", maxWidth: "340px" }}>
-          Legacy layout with poor mobile UX, slow load times, weak messaging, and inconsistent branding.
-        </p>
-        <div style={{ display: "flex", gap: "8px", marginTop: "16px", flexWrap: "wrap" }}>
-          {["42 Performance", "Not responsive", "8s Load Time"].map((t) => (
-            <span key={t} style={{ fontFamily: "Georgia, serif", fontSize: "10px", letterSpacing: "0.06em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "100px", padding: "4px 10px" }}>{t}</span>
-          ))}
+      <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 2, clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+        <img src="/before.png" alt="Before redesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+        <div style={{ position: "absolute", bottom: "12px", left: "12px", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", borderRadius: "100px", padding: "4px 12px" }}>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", fontWeight: 500 }}>Before</span>
         </div>
       </div>
 
@@ -330,7 +306,7 @@ export default function CaseStudyPage() {
 
           <CaseStudySection number="05" label="Comparison" title="Before & After" delay={0.05}>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: T.faint, fontStyle: "italic", margin: "0 0 16px 0" }}>
-              Drag the slider to compare — replace with your actual screenshots.
+              Drag the slider to compare
             </p>
             <BeforeAfterSlider />
           </CaseStudySection>
