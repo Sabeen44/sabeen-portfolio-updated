@@ -16,6 +16,14 @@ const projects = [
   },
   {
     number: '02',
+    title: 'HomesByMeena',
+    description: 'Upgraded a real estate website with a modern UI, interactive home valuation flow, and a polished map‑based search experience.',
+    tags: ['Next.js', 'Supabase', 'CSS3'],
+    githubUrl: 'https://github.com/Sabeen44/Homes-By-Meena',
+    caseStudyUrl: '/case-study/homesbymeena',
+  },
+  {
+    number: '03',
     title: 'PickFlick',
     description: 'Fun, interactive app that recommends movies based on the user\'s mood — expressed through emojis. Integrates the Streaming Availability API to surface real‑time movie info and where to watch.',
     tags: ['React', 'Tailwind', 'REST API'],
@@ -23,7 +31,7 @@ const projects = [
     githubUrl: 'https://github.com/Sabeen44/PickFlick-updated',
   },
   {
-    number: '03',
+    number: '04',
     title: 'Noted',
     description: 'Google Docs lite — users create notebooks, write notes, and collaborate in real time. Features online presence indicators, a rich text editor, and an AI writing assistant.',
     tags: ['Next.js', 'Supabase', 'Claude API', 'TipTap'],
@@ -68,14 +76,16 @@ function ProjectCard({ project, index }) {
           {project.number}
         </span>
         <div className="flex gap-4">
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="uppercase tracking-widest font-dm text-[#888880] text-[15px] hover:text-[#E84545] transition-colors"
-          >
-            GitHub
-          </a>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="uppercase tracking-widest font-dm text-[#888880] text-[15px] hover:text-[#E84545] transition-colors"
+            >
+              GitHub
+            </a>
+          )}
           {project.liveUrl && project.liveUrl !== project.githubUrl && (
             <a
               href={project.liveUrl}
@@ -197,7 +207,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {projects.map((project, i) => (
             <ProjectCard key={project.number} project={project} index={i} />
           ))}

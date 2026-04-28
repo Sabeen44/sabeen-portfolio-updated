@@ -1,0 +1,332 @@
+'use client';
+
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+
+/* ─────────────────── DESIGN TOKENS ─────────────────── */
+const T = {
+  bg: "#F8F6F0",
+  surface: "#EDEAE2",
+  dark: "#111111",
+  red: "#E84545",
+  muted: "#888880",
+  border: "#DEDAD2",
+  faint: "#BBBBB0",
+  chip: "#444444",
+};
+
+/* ─────────────────── UTILITIES ─────────────────── */
+function useInView(threshold = 0.12) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); } },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
+
+function FadeUp({ children, delay = 0, className = "", style = {} }) {
+  const [ref, vis] = useInView();
+  return (
+    <div ref={ref} className={className} style={{ ...style, opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(24px)", transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s` }}>
+      {children}
+    </div>
+  );
+}
+
+function CrossMark({ top, left, right, bottom }) {
+  return (
+    <div style={{ position: "absolute", pointerEvents: "none", top, left, right, bottom, opacity: 0.15 }}>
+      <div style={{ position: "absolute", width: "14px", height: "1px", background: "#bd0f0f", top: 0, left: "-7px" }} />
+      <div style={{ position: "absolute", width: "1px", height: "14px", background: "#792020", top: "-7px", left: 0 }} />
+    </div>
+  );
+}
+
+function EditorialRule({ top }) {
+  return <div style={{ position: "absolute", left: 0, right: 0, top, height: "0.5px", background: "rgba(17,17,17,0.06)", pointerEvents: "none" }} />;
+}
+
+function SectionLabel({ text }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
+      <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: T.red, flexShrink: 0 }} />
+      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500, color: T.red }}>{text}</span>
+    </div>
+  );
+}
+
+function FolioLabel({ text, s = {} }) {
+  return <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: T.faint, ...s }}>{text}</div>;
+}
+
+function CaseStudySection({ number, label, title, children, delay = 0 }) {
+  return (
+    <FadeUp delay={delay}>
+      <div style={{ marginBottom: "clamp(48px, 6vw, 72px)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "0.1em", color: T.red, fontWeight: 500 }}>{number}</span>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: T.faint }}>{label}</span>
+        </div>
+        <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 400, fontStyle: "italic", color: T.dark, margin: "0 0 8px 0", lineHeight: 1.15, letterSpacing: "-0.01em" }}>{title}</h2>
+        <div style={{ width: "36px", height: "2.5px", background: T.red, borderRadius: "1px", marginBottom: "20px" }} />
+        {children}
+      </div>
+    </FadeUp>
+  );
+}
+
+function CaseBullet({ text }) {
+  return (
+    <div style={{ display: "flex", alignItems: "flex-start", gap: "12px", marginBottom: "10px" }}>
+      <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: T.red, marginTop: "7px", flexShrink: 0 }} />
+      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: T.muted }}>{text}</span>
+    </div>
+  );
+}
+
+function ToolChip({ label }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <span
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "0.06em",
+        textTransform: "uppercase", fontWeight: 500,
+        color: hov ? T.bg : T.chip,
+        background: hov ? T.dark : "transparent",
+        border: `1px solid ${hov ? T.dark : T.border}`,
+        borderRadius: "100px", padding: "7px 16px",
+        transition: "all 0.25s ease", cursor: "default",
+      }}
+    >
+      {label}
+    </span>
+  );
+}
+
+/* ─────────────────── PAGE ─────────────────── */
+export default function HomesByMeenaCaseStudyPage() {
+  return (
+    <div style={{ background: T.bg, minHeight: "100vh", color: T.dark, fontFamily: "'DM Sans', sans-serif", position: "relative" }}>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+      <div style={{ position: "relative", overflow: "hidden" }}>
+        {/* Editorial decoration */}
+        <CrossMark top="5%" right="10%" />
+        <CrossMark top="28%" left="6%" />
+        <CrossMark top="55%" right="8%" />
+        <CrossMark bottom="12%" left="10%" />
+        <EditorialRule top="18%" />
+        <EditorialRule top="45%" />
+        <EditorialRule top="75%" />
+
+        <div style={{ position: "absolute", width: "clamp(220px, 30vw, 420px)", height: "clamp(220px, 30vw, 420px)", borderRadius: "50%", border: "1px solid rgba(17,17,17,0.04)", top: "3%", right: "-10%", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", width: "clamp(140px, 18vw, 260px)", height: "clamp(140px, 18vw, 260px)", borderRadius: "50%", border: "1px solid rgba(232,69,69,0.08)", bottom: "15%", left: "-5%", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", width: "clamp(7px,0.7vw,11px)", height: "clamp(7px,0.7vw,11px)", borderRadius: "50%", background: T.red, top: "8%", left: "16%", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", width: "clamp(4px,0.4vw,7px)", height: "clamp(4px,0.4vw,7px)", borderRadius: "50%", background: T.red, opacity: 0.35, bottom: "22%", right: "14%", pointerEvents: "none" }} />
+
+        {/* ── Hero ── */}
+        <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "clamp(48px,6vw,80px) clamp(16px,4vw,40px) clamp(24px,3vw,40px)" }}>
+          <FadeUp><SectionLabel text="Case Study" /></FadeUp>
+          <FadeUp delay={0.1}>
+            <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(2.25rem, 5vw, 5rem)", fontWeight: 400, lineHeight: 1.05, margin: "0 0 8px 0", letterSpacing: "-0.02em", color: T.dark }}>
+              A luxury real estate platform
+            </h1>
+            <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(2.25rem, 5vw, 5rem)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.05, margin: "0 0 12px 0", letterSpacing: "-0.02em", color: T.dark }}>
+              built for a <span style={{ color: T.red }}>top producer.</span>
+            </h1>
+          </FadeUp>
+          <FadeUp delay={0.15}>
+            <div style={{ width: "clamp(100px,14vw,180px)", height: "3px", background: T.red, borderRadius: "1px", marginBottom: "24px" }} />
+          </FadeUp>
+
+          {/* Meta chips */}
+          <FadeUp delay={0.2}>
+            <div style={{ display: "flex", gap: "clamp(12px, 2vw, 24px)", flexWrap: "wrap", marginBottom: "8px" }}>
+              {[
+                { label: "Client", value: "Meena Dhawan, KW Eastside" },
+                { label: "Role", value: "Design & Dev" },
+                { label: "Stack", value: "Next.js · Mapbox · Supabase" },
+                { label: "Year", value: "2026" },
+              ].map((m) => (
+                <div key={m.label} style={{
+                  display: "flex", flexDirection: "column", gap: "2px",
+                  background: "rgba(7,7,7,0.87)", borderRadius: "4px",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  padding: "clamp(8px,0.8vw,11px) clamp(14px,1.6vw,22px)",
+                  minWidth: "clamp(90px, 9vw, 130px)",
+                }}>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#dfdfd4" }}>{m.label}</span>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(12px,1.1vw,15px)", fontWeight: 500, color: "#F8F6F0" }}>{m.value}</span>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
+        </div>
+
+        {/* ── Content ── */}
+        <div style={{ maxWidth: "760px", margin: "0 auto", padding: "clamp(24px, 4vw, 48px) clamp(16px,4vw,40px) 0" }}>
+
+          <CaseStudySection number="01" label="Overview" title="Project Overview">
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: T.muted, margin: 0 }}>
+              Designed and built a full-stack real estate website for Meena Dhawan, a Top 5% Keller Williams agent serving Kirkland, Bellevue, Redmond, and the greater Eastside. The goal was a brand that matched her caliber — luxury aesthetic, real lead capture, and a property search experience typically reserved for large brokerages.
+            </p>
+          </CaseStudySection>
+
+          <CaseStudySection number="02" label="Challenge" title="The Problem" delay={0.05}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: T.muted, margin: "0 0 16px 0" }}>
+              Meena's existing web presence didn't reflect her caliber as a top producer. The site was falling short across every dimension that matters:
+            </p>
+            <CaseBullet text="Generic template aesthetic that conveyed nothing about her luxury market positioning" />
+            <CaseBullet text="No interactive property search — visitors had to leave the site to look at listings" />
+            <CaseBullet text="Zero lead capture — no home valuation flow, no structured contact form" />
+            <CaseBullet text="No showcase for her transaction history or client results" />
+          </CaseStudySection>
+
+          <CaseStudySection number="03" label="Solution" title="What I Built" delay={0.05}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0", border: `1px solid ${T.border}`, borderRadius: "2px", overflow: "hidden" }}>
+              {[
+                {
+                  title: "Interactive Map Search",
+                  desc: "Split-view property explorer with Mapbox GL. Listings cluster by city with count markers. Selecting a card highlights it on the map. Filters cover city, type, beds, price, and live address search.",
+                },
+                {
+                  title: "Home Valuation Flow",
+                  desc: "3-step multi-screen lead form (address → property details → contact info) with Supabase persistence, loading state, success confirmation, and graceful error handling.",
+                },
+                {
+                  title: "Homepage",
+                  desc: "Full-screen hero with staggered entrance animations, stats row, featured listings carousel, testimonials rotator, seller CTA — all with scroll-driven Framer Motion animations.",
+                },
+                {
+                  title: "Shared Design System",
+                  desc: "Custom Tailwind v4 theme tokens (gold, dark, cream), Playfair Display + Cormorant Garamond via next/font, and reusable FadeUp/SlideIn Framer Motion wrappers across all pages.",
+                },
+              ].map((f, i) => (
+                <div key={f.title} style={{
+                  padding: "clamp(20px, 2.5vw, 28px)",
+                  borderBottom: i < 2 ? `1px solid ${T.border}` : "none",
+                  borderRight: i % 2 === 0 ? `1px solid ${T.border}` : "none",
+                  background: T.bg,
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                    <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: T.red, flexShrink: 0 }} />
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", fontWeight: 600, color: T.dark }}>{f.title}</span>
+                  </div>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: 1.6, color: T.muted, margin: 0 }}>{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </CaseStudySection>
+
+          <CaseStudySection number="04" label="Deep Dive" title="A Problem Worth Solving" delay={0.05}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: T.muted, margin: "0 0 16px 0" }}>
+              Getting a list-selected listing to highlight its marker on the map took significant debugging. Google Maps' <span style={{ fontFamily: "monospace", fontSize: "13px", color: T.dark }}>OverlayView</span> is a PureComponent — it blocks React re-renders from propagating into its portal subtree, meaning prop and context updates from the parent never reached the marker.
+            </p>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: T.muted, margin: "0 0 16px 0" }}>
+              After exhausting context, window events, and key-based remounting strategies, I switched to Mapbox + react-map-gl. Its <span style={{ fontFamily: "monospace", fontSize: "13px", color: T.dark }}>Marker</span> is a plain function component — the highlight worked on the first try.
+            </p>
+            <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderLeft: `3px solid ${T.red}`, borderRadius: "2px", padding: "16px 20px" }}>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: 1.7, color: T.muted, fontStyle: "italic" }}>
+                Takeaway: when a third-party component's lifecycle model conflicts with React's rendering model, switching libraries is faster than fighting the abstraction.
+              </span>
+            </div>
+          </CaseStudySection>
+
+          <CaseStudySection number="05" label="Stack" title="Tools Used" delay={0.05}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+              {["Next.js 16", "React 19", "Tailwind CSS v4", "Mapbox GL", "react-map-gl", "Supabase", "Framer Motion", "Vercel"].map((t) => (
+                <ToolChip key={t} label={t} />
+              ))}
+            </div>
+          </CaseStudySection>
+
+          <CaseStudySection number="06" label="Outcome" title="Results" delay={0.05}>
+            <CaseBullet text="Two complete lead capture flows (contact + home valuation) wired to Supabase" />
+            <CaseBullet text="Live Mapbox property search across 8 Eastside cities with 28 demo listings" />
+            <CaseBullet text="Architecture ready to swap demo data for a live NWMLS feed via SimplyRETS" />
+            <CaseBullet text="Consistent, maintainable component system across 5 pages" />
+          </CaseStudySection>
+
+          <CaseStudySection number="07" label="Links" title="View the Project" delay={0.05}>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+              <a
+                href="https://github.com/Sabeen44/Homes-By-Meena"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "8px",
+                  fontFamily: "'DM Sans', sans-serif", fontSize: "12px", letterSpacing: "0.08em",
+                  textTransform: "uppercase", fontWeight: 500, color: T.dark,
+                  border: `1px solid ${T.border}`, borderRadius: "2px",
+                  padding: "clamp(9px,0.9vw,13px) clamp(16px,2vw,28px)",
+                  textDecoration: "none", transition: "all 0.3s ease", cursor: "pointer",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = T.red; e.currentTarget.style.color = T.red; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = T.border; e.currentTarget.style.color = T.dark; }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                GitHub Repo
+                <span style={{ fontSize: "14px" }}>→</span>
+              </a>
+            </div>
+          </CaseStudySection>
+        </div>
+
+        {/* Bottom CTA */}
+        <div style={{ maxWidth: "760px", margin: "0 auto", padding: "clamp(48px,6vw,80px) clamp(16px,4vw,40px) clamp(32px,4vw,56px)" }}>
+          <FadeUp>
+            <div style={{
+              background: T.dark, borderRadius: "2px", padding: "clamp(36px,5vw,64px) clamp(24px,4vw,56px)",
+              display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "20px",
+              position: "relative", overflow: "hidden",
+            }}>
+              <div style={{ position: "absolute", width: "280px", height: "280px", borderRadius: "50%", border: "1px solid rgba(232,69,69,0.12)", top: "-80px", right: "-80px", pointerEvents: "none" }} />
+              <div style={{ position: "absolute", width: "160px", height: "160px", borderRadius: "50%", border: "1px solid rgba(232,69,69,0.08)", bottom: "-40px", left: "-40px", pointerEvents: "none" }} />
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase", color: T.red, fontWeight: 500 }}>Ready to work together?</span>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(1.5rem,3vw,2.5rem)", fontWeight: 400, fontStyle: "italic", color: T.bg, margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+                Let's build something great.
+              </h2>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: "rgba(248,246,240,0.55)", maxWidth: "400px", margin: 0 }}>
+                Have a project in mind? I'd love to hear about it — reach out and let's talk.
+              </p>
+              <Link
+                href="/contact"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "10px", marginTop: "8px",
+                  fontFamily: "'DM Sans', sans-serif", fontSize: "12px", letterSpacing: "0.08em",
+                  textTransform: "uppercase", fontWeight: 500, color: T.dark,
+                  background: T.bg, border: "none", borderRadius: "2px",
+                  padding: "clamp(12px,1.2vw,16px) clamp(28px,3vw,44px)",
+                  textDecoration: "none", transition: "all 0.3s ease", cursor: "pointer",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = T.red; e.currentTarget.style.color = T.bg; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = T.bg; e.currentTarget.style.color = T.dark; }}
+              >
+                Book a Free Consultation
+                <span style={{ fontSize: "14px" }}>→</span>
+              </Link>
+            </div>
+          </FadeUp>
+        </div>
+
+        {/* Bottom folio */}
+        <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "0 clamp(16px,4vw,40px) 32px", display: "flex", justifyContent: "space-between" }}>
+          <FolioLabel text="Folio — 05" />
+          <FolioLabel text="Case Study" />
+        </div>
+      </div>
+    </div>
+  );
+}
