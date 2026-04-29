@@ -20,6 +20,7 @@ const projects = [
     description: 'Upgraded a real estate website with a modern UI, interactive home valuation flow, and a polished map‑based search experience.',
     tags: ['Next.js', 'Supabase', 'CSS3'],
     githubUrl: 'https://github.com/Sabeen44/Homes-By-Meena',
+    liveUrl: 'https://www.eastsidehomesbymeena.com/',
     caseStudyUrl: '/case-study/homesbymeena',
   },
   {

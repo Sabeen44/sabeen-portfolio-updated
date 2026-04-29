@@ -213,10 +213,10 @@ export default function HomesByMeenaCaseStudyPage() {
           <FadeUp><SectionLabel text="Case Study" /></FadeUp>
           <FadeUp delay={0.1}>
             <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(2.25rem, 5vw, 5rem)", fontWeight: 400, lineHeight: 1.05, margin: "0 0 8px 0", letterSpacing: "-0.02em", color: T.dark }}>
-              A luxury real estate platform
+              A modern real estate platform
             </h1>
             <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(2.25rem, 5vw, 5rem)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.05, margin: "0 0 12px 0", letterSpacing: "-0.02em", color: T.dark }}>
-              built for a <span style={{ color: T.red }}>top producer.</span>
+              built for a <span style={{ color: T.red }}>top‑performing agent.</span>
             </h1>
           </FadeUp>
           <FadeUp delay={0.15}>
@@ -360,6 +360,24 @@ export default function HomesByMeenaCaseStudyPage() {
                 </svg>
                 GitHub Repo
                 <span style={{ fontSize: "14px" }}>→</span>
+              </a>
+              <a
+                href="https://www.eastsidehomesbymeena.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "10px",
+                  fontFamily: "'DM Sans', sans-serif", fontSize: "12px", letterSpacing: "0.08em",
+                  textTransform: "uppercase", fontWeight: 500, color: T.bg,
+                  background: T.dark, border: "none", borderRadius: "2px",
+                  padding: "clamp(10px,1vw,14px) clamp(20px,2.5vw,36px)",
+                  textDecoration: "none", transition: "all 0.3s ease", cursor: "pointer",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = T.red; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = T.dark; }}
+              >
+                Live Site
+                <span style={{ fontSize: "14px" }}>↗</span>
               </a>
             </div>
           </CaseStudySection>
