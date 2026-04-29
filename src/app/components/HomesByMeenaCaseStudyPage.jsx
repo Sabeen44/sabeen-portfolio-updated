@@ -92,6 +92,80 @@ function CaseBullet({ text }) {
   );
 }
 
+/* ─────────────────── BEFORE / AFTER SLIDER ─────────────────── */
+function BeforeAfterSlider() {
+  const [pos, setPos] = useState(50);
+  const containerRef = useRef(null);
+  const dragging = useRef(false);
+
+  const updatePos = (clientX) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    setPos((x / rect.width) * 100);
+  };
+
+  useEffect(() => {
+    const onMove = (e) => {
+      if (!dragging.current) return;
+      e.preventDefault();
+      updatePos(e.touches ? e.touches[0].clientX : e.clientX);
+    };
+    const onUp = () => { dragging.current = false; };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    window.addEventListener("touchmove", onMove, { passive: false });
+    window.addEventListener("touchend", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+      window.removeEventListener("touchmove", onMove);
+      window.removeEventListener("touchend", onUp);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      onMouseDown={(e) => { dragging.current = true; updatePos(e.clientX); }}
+      onTouchStart={(e) => { dragging.current = true; updatePos(e.touches[0].clientX); }}
+      style={{
+        position: "relative", width: "100%", height: "clamp(320px, 44vw, 480px)",
+        borderRadius: "2px", overflow: "hidden", border: `1px solid ${T.border}`,
+        cursor: "ew-resize", userSelect: "none",
+      }}
+    >
+      {/* After (full background) */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 1 }}>
+        <img src="/after-Homes.png" alt="After redesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+        <div style={{ position: "absolute", bottom: "12px", right: "12px", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", borderRadius: "100px", padding: "4px 12px" }}>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", fontWeight: 500 }}>After</span>
+        </div>
+      </div>
+
+      {/* Before (clipped) */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 2, clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+        <img src="/before-Homes.png" alt="Before redesign" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+        <div style={{ position: "absolute", bottom: "12px", left: "12px", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", borderRadius: "100px", padding: "4px 12px" }}>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", fontWeight: 500 }}>Before</span>
+        </div>
+      </div>
+
+      {/* Slider handle */}
+      <div style={{ position: "absolute", top: 0, bottom: 0, left: `${pos}%`, transform: "translateX(-50%)", width: "2px", background: T.red, zIndex: 10, pointerEvents: "none" }}>
+        <div style={{
+          position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+          width: "36px", height: "36px", borderRadius: "50%", background: T.red,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          boxShadow: "0 2px 12px rgba(232,69,69,0.3)",
+        }}>
+          <span style={{ color: "#fff", fontSize: "14px", letterSpacing: "2px" }}>⟨ ⟩</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ToolChip({ label }) {
   const [hov, setHov] = useState(false);
   return (
@@ -228,7 +302,14 @@ export default function HomesByMeenaCaseStudyPage() {
             </div>
           </CaseStudySection>
 
-          <CaseStudySection number="04" label="Deep Dive" title="A Problem Worth Solving" delay={0.05}>
+          <CaseStudySection number="04" label="Comparison" title="Before & After" delay={0.05}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: T.faint, fontStyle: "italic", margin: "0 0 16px 0" }}>
+              Drag the slider to compare
+            </p>
+            <BeforeAfterSlider />
+          </CaseStudySection>
+
+          <CaseStudySection number="05" label="Deep Dive" title="A Problem Worth Solving" delay={0.05}>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: T.muted, margin: "0 0 16px 0" }}>
               Getting a list-selected listing to highlight its marker on the map took significant debugging. Google Maps' <span style={{ fontFamily: "monospace", fontSize: "13px", color: T.dark }}>OverlayView</span> is a PureComponent — it blocks React re-renders from propagating into its portal subtree, meaning prop and context updates from the parent never reached the marker.
             </p>
@@ -242,7 +323,7 @@ export default function HomesByMeenaCaseStudyPage() {
             </div>
           </CaseStudySection>
 
-          <CaseStudySection number="05" label="Stack" title="Tools Used" delay={0.05}>
+          <CaseStudySection number="06" label="Stack" title="Tools Used" delay={0.05}>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
               {["Next.js 16", "React 19", "Tailwind CSS v4", "Mapbox GL", "react-map-gl", "Supabase", "Framer Motion", "Vercel"].map((t) => (
                 <ToolChip key={t} label={t} />
@@ -250,14 +331,14 @@ export default function HomesByMeenaCaseStudyPage() {
             </div>
           </CaseStudySection>
 
-          <CaseStudySection number="06" label="Outcome" title="Results" delay={0.05}>
+          <CaseStudySection number="07" label="Outcome" title="Results" delay={0.05}>
             <CaseBullet text="Two complete lead capture flows (contact + home valuation) wired to Supabase" />
             <CaseBullet text="Live Mapbox property search across 8 Eastside cities with 28 demo listings" />
             <CaseBullet text="Architecture ready to swap demo data for a live NWMLS feed via SimplyRETS" />
             <CaseBullet text="Consistent, maintainable component system across 5 pages" />
           </CaseStudySection>
 
-          <CaseStudySection number="07" label="Links" title="View the Project" delay={0.05}>
+          <CaseStudySection number="08" label="Links" title="View the Project" delay={0.05}>
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
               <a
                 href="https://github.com/Sabeen44/Homes-By-Meena"
