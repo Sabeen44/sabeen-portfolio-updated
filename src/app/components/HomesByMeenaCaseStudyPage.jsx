@@ -212,11 +212,9 @@ export default function HomesByMeenaCaseStudyPage() {
         <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "clamp(48px,6vw,80px) clamp(16px,4vw,40px) clamp(24px,3vw,40px)" }}>
           <FadeUp><SectionLabel text="Case Study" /></FadeUp>
           <FadeUp delay={0.1}>
-            <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(2.25rem, 5vw, 5rem)", fontWeight: 400, lineHeight: 1.05, margin: "0 0 8px 0", letterSpacing: "-0.02em", color: T.dark }}>
-              A modern real estate platform
-            </h1>
-            <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(2.25rem, 5vw, 5rem)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.05, margin: "0 0 12px 0", letterSpacing: "-0.02em", color: T.dark }}>
-              built for a <span style={{ color: T.red }}>top‑performing agent.</span>
+            <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(2.25rem, 5vw, 5rem)", fontWeight: 400, lineHeight: 1.15, margin: "0 0 12px 0", letterSpacing: "-0.02em", color: T.dark }}>
+              A modern real estate platform{" "}
+              <span style={{ fontStyle: "italic" }}>built for a <span style={{ color: T.red }}>top‑performing agent.</span></span>
             </h1>
           </FadeUp>
           <FadeUp delay={0.15}>
