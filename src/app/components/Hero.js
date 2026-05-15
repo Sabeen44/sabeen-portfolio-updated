@@ -320,7 +320,7 @@ const fadeUp = {
   }),
 };
 
-const traits = ['Collaboration', 'Empathy', 'Problem-Solving'];
+const traits = ['Collaboration', 'Technical Curiosity', 'Problem-Solving'];
 
 const chips = [
   { label: 'Focus', value: 'Frontend'   },
@@ -562,18 +562,16 @@ export default function Hero() {
 
         {/* Traits */}
         <motion.div custom={4} variants={fadeUp} initial="hidden" animate="show" className="flex gap-2 flex-wrap">
-          {traits.map((trait) => (
-            <span
-              key={trait}
-              className="text-xs tracking-widest uppercase font-medium cursor-default"
-              style={{ border: '1px solid #DEDAD2', color: '#444444', fontFamily: 'var(--font-dm-sans)', padding: 'clamp(5px,0.5vw,7px) clamp(10px,1.2vw,16px)', borderRadius: '100px' }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = '#111111'; e.currentTarget.style.borderColor = '#111111'; e.currentTarget.style.color = '#F8F6F0'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = '#DEDAD2'; e.currentTarget.style.color = '#444444'; }}
-            >
-              {trait}
-            </span>
-          ))}
-        </motion.div>
+  {traits.map((trait) => (
+    <span
+      key={trait}
+      className="text-xs tracking-widest uppercase font-medium cursor-default"
+      style={{ border: '1px solid #DEDAD2', color: '#444444', backgroundColor: '#edeae2', fontFamily: 'var(--font-dm-sans)', padding: 'clamp(5px,0.5vw,7px) clamp(10px,1.2vw,16px)', borderRadius: '100px' }}
+    >
+      {trait}
+    </span>
+  ))}
+</motion.div>
 
         {/* Chips */}
         <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show" className="flex gap-2 flex-wrap">

@@ -57,9 +57,9 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between px-6 sm:px-10 lg:px-16 py-5 relative z-10 bg-[#F8F6F0]">
-      <span className="font-dm font-medium tracking-widest text-[#111111] text-xs uppercase">
+      <Link href="/" className="font-dm font-medium tracking-widest text-[#111111] text-xs uppercase hover:text-[#E84545] transition-colors duration-200">
         Portfolio.
-      </span>
+      </Link>
 
       {/* Desktop links */}
       <ul className="hidden sm:flex items-center gap-8 md:gap-10 list-none">
