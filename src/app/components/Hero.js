@@ -550,7 +550,7 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href="#"
+            href="/resume.html"
             className="text-xs tracking-widest uppercase font-medium transition-colors"
             style={{ color: '#111111', fontFamily: 'var(--font-dm-sans)', border: '1px solid #BBBBB0', padding: 'clamp(9px,0.9vw,13px) clamp(16px,2vw,28px)', borderRadius: '2px' }}
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#E84545'; e.currentTarget.style.color = '#E84545'; }}
